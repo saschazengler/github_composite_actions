@@ -1,17 +1,10 @@
 name: Install npm dependencies and Node.js
 description: "Install and cache npm dependencies and Node.js"
-inputs:
-  token:
-    required: false
-    description: "Access token to fetch repository"
-    default: ${{ github.TOKEN }}
 runs:
   using: composite
   steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        token: ${{ inputs.token }}
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
