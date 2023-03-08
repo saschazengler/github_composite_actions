@@ -1,0 +1,45 @@
+name: Mark stale issues and pull requests
+description: "Marks a stale issue with a specific label"
+inputs:
+  token:
+    required: true
+    description: 'Access token to checkout repository.'
+    default: ${{ secrets.TOKEN }}
+  issue-label:
+    required: false
+    description: "Message"
+    default: "no-issue-activity"
+  issue-message:
+    required: false
+    description: "Message"
+    default: "No activity on that issue."
+  pr-label:
+    required: false
+    description: "Message"
+    default: "no-pull-request-activity"
+  pr-message:
+    required: false
+    description: "Message"
+    default: "No activity on that pull request."
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Check if any input is provided
+      run: |
+        for INPUT in issue-label issue-message pr-label pr-message; do
+          if [ -z "${{ inputs[$INPUT] }}" ]; then
+          echo "Input '$input' is not provided."
+          exit 1
+          fi
+        done
+      shell: bash
+    - name: Stale
+      uses: actions/stale@v5
+      with:
+        repo-token: ${{ inputs.TOKEN }}
+        stale-issue-label: ${{ inputs.issue-label }}
+        stale-issue-message: ${{ inputs.issue-message }}
+        stale-pr-label: ${{ inputs.pr-label }}
+        stale-pr-message: ${{ inputs.pr-message }}
