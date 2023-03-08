@@ -1,26 +1,26 @@
 name: Mark stale issues and pull requests
-description: "Marks a stale issue with a specific label"
+description: Marks a stale issue or pull request with a specific label and message
 inputs:
   token:
     required: true
-    description: 'Access token to checkout repository.'
+    description: Access token to checkout repository
     default: ${{ github.TOKEN }}
   issue-label:
     required: false
-    description: "Message"
-    default: "no-issue-activity"
+    description: Message
+    default: no-issue-activity
   issue-message:
     required: false
-    description: "Message"
-    default: "No activity on that issue."
+    description: Message
+    default: No activity on that issue.
   pr-label:
     required: false
-    description: "Message"
-    default: "no-pull-request-activity"
+    description: Message
+    default: no-pull-request-activity
   pr-message:
     required: false
-    description: "Message"
-    default: "No activity on that pull request."
+    description: Message
+    default: No activity on that pull request.
 runs:
   using: composite
   steps:
@@ -38,9 +38,10 @@ runs:
         fi
       shell: bash
     - name: Stale
-      uses: actions/stale@v5
+      uses: actions/stale@v7
       with:
         repo-token: ${{ inputs.TOKEN }}
+        days-before-stale: 0
         stale-issue-label: ${{ inputs.issue-label }}
         stale-issue-message: ${{ inputs.issue-message }}
         stale-pr-label: ${{ inputs.pr-label }}
