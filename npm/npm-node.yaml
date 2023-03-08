@@ -2,7 +2,7 @@ name: Install npm dependencies and Node.js
 description: "Install and cache npm dependencies and Node.js"
 inputs:
   token:
-    required: false
+    required: true
     description: "Access token to fetch repository"
     default: ${{ secrets.TOKEN }}
 runs:
