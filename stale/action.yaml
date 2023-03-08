@@ -26,15 +26,17 @@ runs:
   steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-#    - name: Check if any input is provided
-#      run: |
-#        for INPUT in issue-label issue-message pr-label pr-message; do
-#          if [ -z "${{ inputs[$INPUT] }}" ]; then
-#          echo "Input '$input' is not provided."
-#          exit 1
-#          fi
-#        done
-#      shell: bash
+    - name: Check if any input is provided
+      run: |
+        if [ -z "${{ inputs.issue-label }}" ] && \
+          [ -z "${{ inputs.issue-message }}" ] && \
+          [ -z "${{ inputs.pr-label }}" ] && \
+          [ -z "${{ inputs.pr-message }}" ]
+        then
+          echo "No input is provided."
+          exit 1
+        fi
+      shell: bash
     - name: Stale
       uses: actions/stale@v5
       with:
