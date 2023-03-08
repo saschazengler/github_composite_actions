@@ -1,0 +1,19 @@
+name: Lint codebase
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+jobs:
+  lint-codebase:
+    name: Lint codebase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_SUPER_LINTER }}
+          DEFAULT_BRANCH: develop
+          VALIDATE_YAML: true
+          VALIDATE_MARKDOWN: true
