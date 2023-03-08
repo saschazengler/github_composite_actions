@@ -1,3 +1,5 @@
+[![Lint codebase](https://github.com/saschazengler/github_composite_actions/actions/workflows/lint.yaml/badge.svg)](https://github.com/saschazengler/github_composite_actions/actions/workflows/lint.yaml)
+
 # GitHub Composite Actions
 
 Use these composite actions for avoiding redundant code in your workflow file.
